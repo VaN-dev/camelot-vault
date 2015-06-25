@@ -1,0 +1,9 @@
+index:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+
+resource_details:
+    path:     /resources/{id}
+    defaults: { _controller: AppBundle:Default:details }
+    requirements:
+        id: \d+

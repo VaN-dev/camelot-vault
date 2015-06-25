@@ -1,0 +1,105 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-9">
+            <h1>Resource #{{ app.request.attributes.get("id") }} details</h1>
+            <p class="lead">
+                by
+                <a href="#">John Doe</a>
+            </p>
+
+            <hr>
+
+            <p>
+                <span class="glyphicon glyphicon-time"></span>
+                Posted on August 24, 2013 at 9:00 PM
+
+                <span class="label label-primary pull-right">Downloaded 42 times</span>
+            </p>
+
+            <hr>
+
+            <img class="img-responsive" alt="" src="http://placehold.it/900x300">
+
+            <hr>
+
+            <ul class="list-inline preview-links">
+                <li>
+                    <a href="#" class="btn btn-default">
+                        <span class="glyphicon glyphicon-download-alt"></span> Download
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="btn btn-default">
+                        <span class="glyphicon glyphicon-thumbs-up"></span> Recommend
+                    </a>
+                </li>
+                <li>
+                    <a href="#comments" class="btn btn-default">
+                        <span class="glyphicon glyphicon-comment"></span> Leave a comment
+                    </a>
+                </li>
+            </ul>
+
+            <hr>
+
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
+
+            <a name="comments"></a>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Leave a comment</h3>
+                </div>
+                <div class="panel-body">
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </form>
+
+                    <div>
+                        <input type="submit" name="submit" class="btn btn-primary" value="Register">
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            {% for i in 1..4 %}
+                <blockquote>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <footer><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM by <a href="#">John Doe</a></footer>
+                </blockquote>
+            {% endfor %}
+        </div>
+        <div class="col-md-3">
+            <h4>Categories</h4>
+            <div class="list-group">
+                <a href="#" class="list-group-item">
+                    Cras justo odio
+                    <span class="badge">9</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    Dapibus ac facilisis in
+                    <span class="badge">14</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    Morbi leo risus
+                    <span class="badge">18</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    Porta ac consectetur ac
+                    <span class="badge">3</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    Vestibulum at eros
+                    <span class="badge">23</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

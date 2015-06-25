@@ -1,0 +1,4 @@
+services:
+#    van_user.example:
+#        class: Van\UserBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
