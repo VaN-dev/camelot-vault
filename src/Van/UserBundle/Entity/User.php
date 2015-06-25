@@ -3,10 +3,13 @@
 namespace Van\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
+ * @UniqueEntity(fields={"username", "email"})
  */
 class User
 {
@@ -19,19 +22,14 @@ class User
 
     /**
      * @var string
-     * @ORM\Column(name="username", type="string", length=255, nullable=false)
+     * @ORM\Column(name="username", unique=true, type="string", length=255, nullable=false)
      */
     protected $username;
 
     /**
      * @var string
-     * @ORM\Column(name="username_canonical", type="string", length=255, nullable=false)
-     */
-    protected $usernameCanonical;
-
-    /**
-     * @var string
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @ORM\Column(name="email", unique=true, type="string", length=255, nullable=false)
+     * @Assert\Email()
      */
     protected $email;
 
@@ -116,6 +114,18 @@ class User
     }
 
     /**
+     * Construct
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+        $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
+        $this->enabled = false;
+        $this->locked = false;
+        $this->roles = [];
+    }
+
+    /**
      * Get plainPassword
      *
      * @return string
@@ -156,29 +166,6 @@ class User
     public function getUsername()
     {
         return $this->username;
-    }
-
-    /**
-     * Set usernameCanonical
-     *
-     * @param string $usernameCanonical
-     * @return User
-     */
-    public function setUsernameCanonical($usernameCanonical)
-    {
-        $this->usernameCanonical = $usernameCanonical;
-
-        return $this;
-    }
-
-    /**
-     * Get usernameCanonical
-     *
-     * @return string 
-     */
-    public function getUsernameCanonical()
-    {
-        return $this->usernameCanonical;
     }
 
     /**
