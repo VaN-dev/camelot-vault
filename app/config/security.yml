@@ -1,13 +1,26 @@
 security:
 
     providers:
-        in_memory:
-            memory: ~
+        main:
+          entity: { class: Van\UserBundle\Entity\User, property: username }
+
+    encoders:
+        Van\UserBundle\Entity\User:
+            id: van_security.password_encoder
 
     firewalls:
-        dev:
-            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
-            security: false
-
         main:
+            pattern:    ^/
             anonymous: ~
+            form_login:
+                login_path:  /login
+                check_path:  /login_check
+            logout:
+                path:   /logout
+                target: /
+
+    access_control:
+        - { path: ^/profile, roles: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

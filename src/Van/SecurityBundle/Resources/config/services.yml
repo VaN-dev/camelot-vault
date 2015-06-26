@@ -1,0 +1,3 @@
+services:
+    van_security.password_encoder:
+        class: Van\SecurityBundle\Service\PasswordEncoder

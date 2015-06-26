@@ -1,3 +1,15 @@
+van_upload:
+    resource: "@VanUploadBundle/Resources/config/routing.yml"
+    prefix:   /
+
+van_resource:
+    resource: "@VanResourceBundle/Resources/config/routing.yml"
+    prefix:   /
+
+van_security:
+    resource: "@VanSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+
 van_user:
     resource: "@VanUserBundle/Resources/config/routing.yml"
     prefix:   /

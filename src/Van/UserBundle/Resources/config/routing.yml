@@ -1,3 +1,7 @@
 van_user_registration:
     path:     /register
     defaults: { _controller: VanUserBundle:Registration:index }
+
+van_user_profile:
+    path:     /profile
+    defaults: { _controller: VanUserBundle:Profile:index }

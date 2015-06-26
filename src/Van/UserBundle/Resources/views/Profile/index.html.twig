@@ -1,0 +1,17 @@
+{% extends '@App/layout.html.twig' %}
+
+{% block content %}
+    <h1>Profile</h1>
+
+    {{ form_start(blueprintForm) }}
+    <div class="form-group">
+        {{ form_label(blueprintForm.name) }}
+        {{ form_widget(blueprintForm.name) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(blueprintForm.file) }}
+        {{ form_widget(blueprintForm.file) }}
+    </div>
+    <input type="submit" class="btn btn-default" value="Upload">
+    {{ form_end(blueprintForm) }}
+{% endblock %}

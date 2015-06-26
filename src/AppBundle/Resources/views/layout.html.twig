@@ -25,16 +25,20 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">Contact us</a></li>
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                        <li><a href="{{ path('van_user_profile') }}">Profile</a></li>
+                        <li><a href="{{ path('logout') }}">Logout</a></li>
+                    {% else %}
                     <li><a href="{{ path('van_user_registration') }}">Register</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sign in</a>
                         <div class="dropdown-menu dropdown-navbar-login">
-                            <form method="post">
+                            <form method="post" action="{{ path('login_check') }}">
                                 <div class="form-group">
-                                    <input type="email" placeholder="Username" id="username" name="username" class="form-control" required="1">
+                                    <input type="text" placeholder="Username" id="username" name="_username" class="form-control" required="1">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="Password" id="password" name="password" class="form-control" required="1">
+                                    <input type="password" placeholder="Password" id="password" name="_password" class="form-control" required="1">
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-6">
@@ -54,7 +58,7 @@
                             </form>
                         </div>
                     </li>
-
+                    {% endif %}
                 </ul>
                 <form class="navbar-form navbar-search-form navbar-right">
                     <div class="input-group">

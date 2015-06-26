@@ -22,7 +22,9 @@ class RegistrationController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $user->setPassword($user->getPlainPassword());
+                // Password encoding
+                $passwordEncoding = $this->container->get('van_security.password_encoder');
+                $user->setPassword($passwordEncoding->encodePassword($user->getPlainPassword(), $user->getSalt()));
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
