@@ -1,4 +1,3 @@
 services:
     van_upload.uploader:
         class:      Van\UploadBundle\Service\Uploader
-        arguments:  [%van_upload.directory%]

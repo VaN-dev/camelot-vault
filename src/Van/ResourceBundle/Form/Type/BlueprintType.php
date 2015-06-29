@@ -11,6 +11,7 @@ class BlueprintType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('description')
             ->add('file', 'file')
         ;
     }

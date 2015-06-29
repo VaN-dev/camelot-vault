@@ -4,6 +4,7 @@ namespace Van\UploadBundle\Service;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Van\ResourceBundle\Entity\Blueprint;
 use Van\ResourceBundle\Model\Uploadable;
 
 class Uploader
@@ -15,12 +16,9 @@ class Uploader
 
     /**
      * Construct
-     *
-     * @param $directory
      */
-    public function __construct($directory)
+    public function __construct()
     {
-        $this->directory = $directory;
     }
 
     /**
@@ -39,7 +37,7 @@ class Uploader
         }
         $fileName = $this->generateFilename($file, $randomize);
 
-        $file->move($this->directory, $fileName);
+        $file->move($this->directory . '/' . $uploadable->getUploadDir(), $fileName);
         $uploadable->setPath($fileName);
     }
 

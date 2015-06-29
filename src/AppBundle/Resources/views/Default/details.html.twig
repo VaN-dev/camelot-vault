@@ -1,33 +1,32 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block content %}
+    <h1>{{ blueprint.name }}</h1>
 
     <div class="row">
         <div class="col-md-9">
-            <h1>Resource #{{ app.request.attributes.get("id") }} details</h1>
             <p class="lead">
-                by
-                <a href="#">John Doe</a>
+                by <a href="#">{{ blueprint.uploadedBy.username }}</a>
             </p>
 
             <hr>
 
             <p>
                 <span class="glyphicon glyphicon-time"></span>
-                Posted on August 24, 2013 at 9:00 PM
+                Uploaded on {{ blueprint.uploadedAt | date("F d, Y \\a\\t g:m A") }}
 
-                <span class="label label-primary pull-right">Downloaded 42 times</span>
+                <span class="label label-primary pull-right">Downloaded {{ blueprint.downloaded }} {% transchoice blueprint.downloaded %}{0,1} time|]1,Inf] times{% endtranschoice %}</span>
             </p>
 
             <hr>
 
-            <img class="img-responsive" alt="" src="http://placehold.it/900x300">
+            <img class="img-responsive" alt="" src="{{ asset('bundles/vanresource/images/blueprint-900x300.jpg') }}">
 
             <hr>
 
             <ul class="list-inline preview-links">
                 <li>
-                    <a href="#" class="btn btn-default">
+                    <a href="{{ path('van_resource_blueprint_download', {'id': blueprint.id}) }}" class="btn btn-default">
                         <span class="glyphicon glyphicon-download-alt"></span> Download
                     </a>
                 </li>
@@ -45,8 +44,7 @@
 
             <hr>
 
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
+            <p>{{ blueprint.description }}</p>
 
             <a name="comments"></a>
             <div class="panel panel-default">

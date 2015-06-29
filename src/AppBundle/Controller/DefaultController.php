@@ -13,15 +13,23 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        $registrationForm = $this->createForm(new RegistrationType(), $user = new User());
+        $em = $this->getDoctrine()->getManager();
+
+        $latestBlueprints = $em->getRepository('VanResourceBundle:Blueprint')->getLatest(6);
 
         return $this->render('AppBundle:Default:index.html.twig', [
-            'registrationForm' => $registrationForm->createView(),
+            'latestBlueprints' => $latestBlueprints,
         ]);
     }
 
-    public function detailsAction()
+    public function detailsAction($id)
     {
-        return $this->render('AppBundle:Default:details.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $blueprint = $em->getRepository('VanResourceBundle:Blueprint')->find($id);
+
+        return $this->render('AppBundle:Default:details.html.twig', [
+            'blueprint' =>$blueprint,
+        ]);
     }
 }

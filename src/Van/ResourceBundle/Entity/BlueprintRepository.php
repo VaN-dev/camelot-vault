@@ -12,4 +12,18 @@ use Doctrine\ORM\EntityRepository;
  */
 class BlueprintRepository extends EntityRepository
 {
+    /**
+     * get latest blueprints
+     *
+     * @param int $limit
+     * @return array
+     */
+    public function getLatest($limit = 10)
+    {
+        $qb = $this->createQueryBuilder('bp')
+        ->orderBy('bp.uploadedAt', 'DESC')
+        ->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+    }
 }

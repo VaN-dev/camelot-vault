@@ -17,8 +17,6 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
-            new Vich\UploaderBundle\VichUploaderBundle(),
-
             new AppBundle\AppBundle(),
             new Van\UserBundle\VanUserBundle(),
             new Van\SecurityBundle\VanSecurityBundle(),

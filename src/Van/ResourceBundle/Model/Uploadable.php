@@ -2,7 +2,6 @@
 
 namespace Van\ResourceBundle\Model;
 
-
 interface Uploadable
 {
     public function setPath($path);
@@ -10,6 +9,8 @@ interface Uploadable
     public function getFile();
 
     public function getWebPath();
+
+    public function getUploadDir();
 
     public function getAbsolutePath();
 

@@ -21,7 +21,7 @@ class ProfileController extends Controller
                     $em = $this->getDoctrine()->getEntityManager();
                     $blueprint->setUploadedBy($this->getUser());
 
-                    $this->get('van_upload.uploader')->upload($blueprint, $randomize = false);
+                    $this->get('van_upload.uploader')->upload($blueprint);
                     $em->persist($blueprint);
                     $em->flush();
 

@@ -1,3 +1,5 @@
-van_resource_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: VanResourceBundle:Default:index }
+van_resource_blueprint_download:
+    path:     /resources/{id}/download
+    defaults: { _controller: VanResourceBundle:Default:downloadBlueprint }
+    requirements:
+        id: \d+

@@ -4,14 +4,15 @@ namespace Van\ResourceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Van\ResourceBundle\Model\Uploadable;
 
 /**
  * Blueprint
  *
  * @ORM\Table(name="blueprints")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\BlueprintRepository")
+ * @ORM\Entity(repositoryClass="Van\ResourceBundle\Entity\BlueprintRepository")
  */
-class Blueprint extends AbstractResource
+class Blueprint implements Uploadable
 {
     /**
      * @var integer
@@ -25,7 +26,7 @@ class Blueprint extends AbstractResource
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="uploaded_at", type="datetime")
+     * @ORM\Column(name="uploaded_at", type="datetime", nullable=true)
      */
     protected $uploadedAt;
 
@@ -54,14 +55,97 @@ class Blueprint extends AbstractResource
     /**
      * @var string
      *
+     * @ORM\Column(name="description", type="text")
+     */
+    protected $description;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="path", type="string", length=255)
      */
     protected $path;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="downloaded", type="integer")
+     */
+    protected $downloaded = 0;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="enabled", type="smallint")
+     */
+    protected $enabled = true;
+
+    /**
      * @var File $file
      */
     protected $file;
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     * @return Blueprint
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->getPath() ? null : '/'.$this->getUploadDir() . '/' . $this->getPath();
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->getPath() ? null : $this->getUploadRootDir() . '/' . $this->getPath();
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if (file_exists($this->getAbsolutePath())) {
+            if ($file = $this->getAbsolutePath()) {
+                unlink($file);
+            }
+        }
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded documents should be saved
+        return __DIR__ . '/../../../../www/' . $this->getUploadDir();
+    }
+
+    public function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'uploads/resources/blueprints';
+    }
+
+    public function getFileExtension()
+    {
+        return pathinfo($this->getPath(), PATHINFO_EXTENSION);
+    }
 
 
     /**
@@ -167,29 +251,6 @@ class Blueprint extends AbstractResource
     }
 
     /**
-     * Set file
-     *
-     * @param string $file
-     * @return Blueprint
-     */
-    public function setFile($file)
-    {
-        $this->file = $file;
-
-        return $this;
-    }
-
-    /**
-     * Get file
-     *
-     * @return string 
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
      * Set uploadedBy
      *
      * @param \Van\UserBundle\Entity\User $uploadedBy
@@ -210,5 +271,74 @@ class Blueprint extends AbstractResource
     public function getUploadedBy()
     {
         return $this->uploadedBy;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Blueprint
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set downloaded
+     *
+     * @param string $downloaded
+     * @return Blueprint
+     */
+    public function setDownloaded($downloaded)
+    {
+        $this->downloaded = $downloaded;
+
+        return $this;
+    }
+
+    /**
+     * Get downloaded
+     *
+     * @return string
+     */
+    public function getDownloaded()
+    {
+        return $this->downloaded;
+    }
+
+    /**
+     * Set enabled
+     *
+     * @param string $enabled
+     * @return Blueprint
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return string
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
     }
 }
