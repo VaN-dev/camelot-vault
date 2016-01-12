@@ -1,0 +1,64 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ category.name }}</h1>
+
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+                {% for blueprint in blueprints %}
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <a href="#"><img src="{{ asset('bundles/vanresource/images/blueprint-250x150.jpg') }}" alt=""></a>
+                        <div class="caption">
+                            <h3><a href="{{ path('resource_details', {'id': blueprint.id}) }}">{{ blueprint.name }}</a></h3>
+                            <p>{{ blueprint.description | length > 100 ? blueprint.description | slice(0, 97) ~ '...' : blueprint.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <nav>
+                        <ul class="pagination">
+                            <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <h4>Categories</h4>
+            <div class="list-group">
+                <a href="#" class="list-group-item">
+                    Cras justo odio
+                    <span class="badge">9</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    Dapibus ac facilisis in
+                    <span class="badge">14</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    Morbi leo risus
+                    <span class="badge">18</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    Porta ac consectetur ac
+                    <span class="badge">3</span>
+                </a>
+                <a href="#" class="list-group-item">
+                    Vestibulum at eros
+                    <span class="badge">23</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

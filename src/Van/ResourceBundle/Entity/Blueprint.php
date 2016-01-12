@@ -24,6 +24,13 @@ class Blueprint implements Uploadable
     protected $id;
 
     /**
+     * @var \Van\ResourceBundle\Entity\Category
+     * @ORM\ManyToOne(targetEntity="Van\ResourceBundle\Entity\Category")
+     * @ORM\JoinColumn(name="category_id")
+     */
+    protected $category;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="uploaded_at", type="datetime", nullable=true)
@@ -41,7 +48,7 @@ class Blueprint implements Uploadable
      * @var \Van\UserBundle\Entity\User
      *
      * @ORM\ManyToOne(targetEntity="Van\UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="uploaded_by", nullable=true)
+     * @ORM\JoinColumn(name="uploaded_by")
      */
     protected $uploadedBy;
 
@@ -340,5 +347,28 @@ class Blueprint implements Uploadable
     public function getEnabled()
     {
         return $this->enabled;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Van\ResourceBundle\Entity\Category $category
+     * @return Blueprint
+     */
+    public function setCategory(\Van\ResourceBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Van\ResourceBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

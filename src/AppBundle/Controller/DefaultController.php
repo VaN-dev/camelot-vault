@@ -28,7 +28,7 @@ class DefaultController extends Controller
 
         $blueprint = $em->getRepository('VanResourceBundle:Blueprint')->find($id);
 
-        return $this->render('AppBundle:Default:details.html.twig', [
+        return $this->render('VanResourceBundle:Blueprint:details.html.twig', [
             'blueprint' =>$blueprint,
         ]);
     }

@@ -12,6 +12,12 @@ class BlueprintType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
+            ->add('category', 'entity', [
+                'class' => 'Van\ResourceBundle\Entity\Category',
+                'property' => 'name',
+                'empty_data' => null,
+                'empty_value' => 'Choose a category...',
+            ])
             ->add('file', 'file')
         ;
     }

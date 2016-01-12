@@ -3,3 +3,9 @@ van_resource_blueprint_download:
     defaults: { _controller: VanResourceBundle:Default:downloadBlueprint }
     requirements:
         id: \d+
+
+van_resource_category:
+    path:     /category/{slug}
+    defaults: { _controller: AppBundle:Category:details }
+    requirements:
+        slug: "[a-zA-Z1-9\-]+"
